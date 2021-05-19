@@ -14,7 +14,7 @@ pipeline{
         stage('prepare Artifacts') {
             steps {
                 sh '''
-                zip -r ../todo.zip *
+                zip -r todo.zip *
             '''
             }
 
