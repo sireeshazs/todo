@@ -1,30 +1,8 @@
-pipeline{
+@Library('todo') _
 
-    agent any
-
-    stages {
-
-        stage('Download Dependencies') {
-            steps {
-                sh '''
-                npm install
-            '''
-            }
-        }
-        stage('prepare Artifacts') {
-            steps {
-                sh '''
-                zip -r todo.zip *
-            '''
-            }
-
-        }
-        stage('upload Artifacts') {
-            steps {
-                sh '''
-           curl -f -v -u admin:admin --upload-file todo.zip http://172.31.11.104:8081/repository/todo/todo.zip
-        '''
-            }
-        }
-    }
-}
+todo (
+        COMPONENT             : 'todo',
+        PROJECT_NAME          : "TODOAPP",
+        SLAVE_LABEL           : "agent1",
+        SKIP_NEXUS_UPLOAD     : false,
+        APP_TYPE              : "NGINX"
